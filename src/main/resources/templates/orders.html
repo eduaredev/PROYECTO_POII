@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Proyecto POOII</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+    </style>
+</head>
+<body>
+<h2>Panel de Órdenes Pendientes/En Proceso de Envío</h2>
+
+<div>
+    <p><strong>Total de Órdenes:</strong> <span th:text="${totalCount}"></span></p>
+    <p><strong>Monto Total Acumulado:</strong> $<span th:text="${#numbers.formatDecimal(totalAmount, 1, 'COMMA', 2, 'POINT')}"></span></p>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID Orden</th>
+        <th>Nombre del Cliente</th>
+        <th>Fecha de Orden</th>
+        <th>Estado</th>
+        <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.customerName}"></td>
+        <td th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd')}"></td>
+        <td th:switch="${order.status}">
+            <span th:case="1">En Proceso</span>
+            <span th:case="2">Pendiente</span>
+        </td>
+        <td th:text="'$' + ${#numbers.formatDecimal(order.total, 1, 'COMMA', 2, 'POINT')}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
