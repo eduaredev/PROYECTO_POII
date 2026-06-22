@@ -18,6 +18,13 @@
     <p><strong>Monto Total Acumulado:</strong> $<span th:text="${#numbers.formatDecimal(totalAmount, 1, 'COMMA', 2, 'POINT')}"></span></p>
 </div>
 
+<div style="margin-bottom: 20px;">
+    <a th:href="@{/download}"
+       style="background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; font-family: Arial, sans-serif;">
+        Descargar Reporte (CSV)
+    </a>
+</div>
+
 <table>
     <thead>
     <tr>

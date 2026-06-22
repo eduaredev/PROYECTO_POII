@@ -83,7 +83,9 @@ public class OrderService {
     }
 
     private void saveToFile(List<OrderProjection> orders) {
-        String filePath = "ordenes_pendientes.csv";
+        String tmpDir = System.getProperty("java.io.tmpdir");
+        String filePath = tmpDir + "/ordenes_pendientes.csv";
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write("ID,CustomerName,OrderDate,Status,Total\n");
             for (OrderProjection o : orders) {
